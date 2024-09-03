@@ -1,8 +1,10 @@
-<div>
-    <h4>Title</h4>
-    <p>Description</p>
-    <h4>Title</h4>
-    <p>Description</p>
-    <h4>Title</h4>
-    <p>Description</p>
+<!-- ngFor here is Angular Directive which are HTML ATTRIBUTES to enhance efficiency  -->
+<div class="container">
+    <app-add-todo (todoAddEvent)="handleTodoAddEvent($event)"></app-add-todo>
+    <h3 class="mt-3">Your Todos</h3>
+    <div class="list-unstyled" *ngFor="let todo of todos">
+        <!-- <li><h3>{{todo.title}}</h3></li>
+        <li><p>{{todo.desc}}</p></li> -->
+        <app-todo-item [todo]="todo" (todoDeleteEvent)="handleTodoDeleteEvent($event)"  ></app-todo-item>
+    </div> 
 </div>
