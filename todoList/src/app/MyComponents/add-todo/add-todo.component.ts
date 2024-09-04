@@ -23,16 +23,22 @@ export class AddTodoComponent {
 
   // FUNCTION TO HANDLE SUBMIT TODO IN FORM
   onSubmitTodo(){
-    const todo:Todo = {
-      sno:100,
-      title: this.title,
-      desc: this.desc,
-      active: true
-    } 
-    this.todoAddEvent.emit(todo)
-    console.log(this.title, this.desc);
-    this.title = "";
-    this.desc = ""
+    if(this.title == "" || this.desc == ""){
+      alert("Title or Description can't be Empty!");
+    }
+    else
+    {
+      const todo:Todo = {
+        sno:100,
+        title: this.title,
+        desc: this.desc,
+        active: true
+      } 
+      this.todoAddEvent.emit(todo)
+      console.log(this.title, this.desc);
+      this.title = "";
+      this.desc = ""
+    }
   };
 
 }

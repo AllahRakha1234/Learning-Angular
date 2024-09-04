@@ -15,41 +15,38 @@ import { AddTodoComponent } from "../add-todo/add-todo.component";
 export class TodosComponent {
 
   todos:Todo[];
+  localItems: string | null;
 
   constructor(){
-    this.todos = [
-      {
-        sno:1,
-        title: "Title-1",
-        desc: "This is description-1",
-        active: true
-      },
-      {
-        sno:2,
-        title: "Title-2",
-        desc: "This is description-2",
-        active: true
-      },
-      {
-        sno:3,
-        title: "Title-3",
-        desc: "This is description-3",
-        active: true
-      }
-    ] 
+    this.localItems = localStorage.getItem("todos");
+    if(this.localItems == null){
+      this.todos = []
+    }
+    else{
+      this.todos = JSON.parse(this.localItems);
+    }
   }
 
   // FUNCTION TO HANDLE THE DELETED TODO
   handleTodoDeleteEvent(todo:Todo){
-    console.log("handleTodoDeleteEvent called")
     const todoIndex = this.todos.indexOf(todo)
     this.todos.splice(todoIndex, 1); // DELETE THE TODO AT GIVEN INDEX UPTO SECOND PARAMETER
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
   // FUNCTION TO HANDLE THE DELETED TODO
   handleTodoAddEvent(todo:Todo){
-    console.log("handleTodoAddEvent called");
     this.todos.push(todo);
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
+  // FUNCTION TO HANDLE THE DELETED TODO
+  handleTodoCheckEvent(todo:Todo){
+    const todoIndex = this.todos.indexOf(todo)
+    this.todos[todoIndex].active = ! this.todos[todoIndex].active
+    localStorage.setItem('todos', JSON.stringify(this.todos));
+    // console.log("handleTodoCheckEvent - todos: ", this.todos)
+  }
+
+ 
 }
