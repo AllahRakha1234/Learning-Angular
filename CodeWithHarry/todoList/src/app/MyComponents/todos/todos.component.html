@@ -1,0 +1,23 @@
+<div class="container py-4">
+    <h2 class="text-center text-primary my-4">Todo List by CWH</h2>
+    <div class="card p-3 shadow-sm">
+        <app-add-todo (todoAddEvent)="handleTodoAddEvent($event)"></app-add-todo>
+    </div>
+    
+    <h3 class="mt-5 text-secondary">Your Todos</h3>
+    <div *ngIf="todos.length === 0; else elseBlock" class="alert alert-warning mt-3 text-center" role="alert">
+        No todos to display.
+    </div>
+    <ng-template #elseBlock>
+        <ul class="list-group list-group-flush mt-3">
+            <li class="list-group-item" *ngFor="let todo of todos; index as i">
+                <app-todo-item 
+                    [indx]="i" 
+                    [todo]="todo" 
+                    (todoCheckEvent)="handleTodoCheckEvent($event)" 
+                    (todoDeleteEvent)="handleTodoDeleteEvent($event)">
+                </app-todo-item>
+            </li>
+        </ul>
+    </ng-template>
+</div>
