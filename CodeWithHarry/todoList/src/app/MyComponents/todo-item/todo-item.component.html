@@ -1,0 +1,9 @@
+<div class="my-3">
+    <h4 [class]="{'strike':!todo.active}">{{todo.title}}</h4>
+    <p [class]="{'strike':!todo.active}">{{todo.desc}}</p>
+    <div class="form-group form-check">
+        <label for="exampleCheck1"  class="form-check-label">Done</label>
+        <input for="exampleCheck1" [checked]="!todo.active"  (click)="handleTodoCheckBox(todo)" type="checkbox" class="form-check-input" name="checkBox" id="checkBox{{indx}}"/>
+    </div>
+    <button class="btn btn-sm btn-danger" (click)="handleDeletion(todo)">Delete</button>
+</div>
